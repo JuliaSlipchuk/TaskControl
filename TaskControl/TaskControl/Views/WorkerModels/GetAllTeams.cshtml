@@ -1,0 +1,19 @@
+﻿@using TaskControl.ViewModels
+@{
+    ViewBag.Title = "Index";
+}
+
+<html>
+<head>
+    <title>ListOfTeams</title>
+</head>
+<body>
+    <h1>List of teams</h1><br />
+    <ul class="square">
+        @foreach (TeamModel teamModel in ViewBag.Teams)
+        {
+            <li>@Html.ActionLink(teamModel.Name, "GetMembers", new { id = teamModel.Id })</li>
+        }
+    </ul>
+</body>
+</html>

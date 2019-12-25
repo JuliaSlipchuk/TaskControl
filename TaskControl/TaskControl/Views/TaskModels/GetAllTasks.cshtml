@@ -1,0 +1,160 @@
+﻿@model IEnumerable<TaskControl.ViewModels.TaskModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Tasks</h2>
+
+@using (Html.BeginForm("GetWorkerThisTask", "TaskModels", FormMethod.Get))
+{
+    <h3>Search worker given task</h3>
+    @Html.Label("lN", "Input task name to find worker: ")
+    @Html.TextBox("taskName", "", new { @class = "form-control text-box single-line" })<br />
+    <button type="submit" class="button btn btn-default">Submit</button><br />
+    if (ViewBag.Worker != null)
+    {
+        <table class="table">
+            <tr>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Position</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+            <tr>
+                <td>@ViewBag.Worker.FirstName</td>
+                <td>@ViewBag.Worker.LastName</td>
+                <td>@ViewBag.Worker.Position</td>
+                <td>@ViewBag.Worker.Phone</td>
+                <td>@ViewBag.Worker.Email</td>
+            </tr>
+        </table>
+    }
+}
+@using (Html.BeginForm("GetDoneOrNotReadyTasksAndRelatTerm", "TaskModels", FormMethod.Get))
+{
+    <h3>Search Done or Not ready tasks term which gone or continious</h3>
+    @Html.Label("label1", "Select status: done or not ready")<br />
+    <input checked="checked" name="Status" type="radio" value="Done" /> @Html.Label("l1", "Done")<br />
+    <input name="Status" type="radio" value="Not ready" /> @Html.Label("l2", "Not ready")<br /><br />
+    @Html.Label("label2", "Select term: continuous or over")<br/>
+    <input checked="checked" name="Term" type="radio" value="Continues" /> @Html.Label("l3", "Continues")<br />
+    <input name="Term" type="radio" value="Over" /> @Html.Label("l4", "Over")<br />
+    <button type="submit" class="button btn btn-default">Submit</button>
+    if (ViewBag.Tasks != null)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Progress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WorkLoad)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in ViewBag.Tasks)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Progress</td>
+                    <td>@item.Status</td>
+                    <td>@item.Deadline</td>
+                    <td>@item.WorkLoad</td>
+                </tr>
+            }
+        </table>
+    }
+}
+<div class="acont">
+@Html.ActionLink("Create New", "Create",new object { }, new { @class="onelink"})
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkerId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Progress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Deadline)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkLoad)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.WorkerId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.ProjectId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Progress)
+            </td>
+            @{ string cssClass;
+                if (item.Status == "Done")
+                {
+                    cssClass = "green";
+                }
+                else
+                {
+                    cssClass = "red";
+                }
+                <td class=@cssClass>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Deadline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkLoad)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

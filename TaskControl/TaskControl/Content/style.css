@@ -1,0 +1,127 @@
+﻿.square {
+    margin: 0;
+    counter-reset: li;
+    list-style: none;
+    background: #E8E8E8;
+    padding: 10px;
+    width: 50%;
+}
+
+.square a {
+    width:100%;
+}
+
+.square li {
+    position: relative;
+    margin: 0 0 10px 2em;
+    padding: 4px 8px;
+    border-top: 2px solid #787A77;
+    transition: .3s linear;
+}
+
+.square li:last-child {
+    margin-bottom: 0;
+}
+
+.square li:before {
+    content: counter(li);
+    counter-increment: li;
+    position: absolute;
+    top: -2px;
+    left: -2em;
+    width: 2em;
+    box-sizing: border-box;
+    margin-right: 8px;
+    padding: 4px;
+    border-top: 2px solid #787A77;
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    border-bottom: 2px solid transparent;
+    background: #787A77;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    transition: .3s linear;
+}
+
+.square li:hover {
+    border-top: 2px solid #389F70;
+}
+
+.square li:hover:before {
+    border: 2px solid #389F70;
+    background: #98EABA;
+}
+
+tr:hover {
+    background:#98EABA; 
+}
+
+td, th {
+    margin: 40px;
+    padding: 1% !important;
+}
+
+.red {
+    background-color: #ff5454;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: #22a368;
+}
+
+/*html,
+body {
+  height: 100%;
+  width: 100%;
+  background-color: #2D2D2D;
+}*/
+
+.acont {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #2D2D2D;
+  width: 150px;
+  margin: 1%;  
+}
+
+.onelink {
+  display: block ;
+  margin: auto !important;
+  padding: 1rem 1.25rem !important;
+  font-family: sans-serif !important;
+  font-size: 1.5rem !important;
+  text-decoration: none !important;
+  color: white !important;
+  position: relative !important;
+  transition: all .3s cubic-bezier(.2, 0, 0, 1) !important;
+  z-index: 1 !important;
+ } 
+a.onelink:after {
+    content: '' !important;
+    display: block !important;
+    height: 2px !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    right: 1.25rem !important;
+    left: 1.25rem !important;
+    background-color: #ffffff !important;
+    transition: all .3s cubic-bezier(.2, 0, 0, 1) !important;
+    transform-origin: bottom center !important;
+    z-index: -1 !important;
+}
+  
+a.onelink:hover {
+    color: #2D2D2D !important;
+ }   
+a.onelink:after {
+      right: 0;
+      left: 0 ;
+      height: 100% ;
+}
+  

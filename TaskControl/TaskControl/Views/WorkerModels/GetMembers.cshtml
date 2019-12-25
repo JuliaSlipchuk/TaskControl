@@ -1,0 +1,105 @@
+﻿@using TaskControl.ViewModels;
+@model IEnumerable<TaskControl.ViewModels.WorkerModel>
+@{
+    ViewBag.Title = "GetMembers";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Members</title>
+</head>
+<body>
+    <h1>Members</h1><br />
+    @using (Html.BeginForm("GetWorkerAndHisTasks", "WorkerModels", FormMethod.Get))
+    {
+        <h3>Search worker and his(her) tasks</h3>
+        @Html.Label("lN", "Input worker last name to find him and his tasks: ")
+        @Html.TextBox("lastName", "", new { @class = "form-control text-box single-line" })<br />
+        <button type="submit" class="button btn btn-default">Submit</button>
+    }
+<div class="acont">
+    @Html.ActionLink("Create New", "Create", new object { }, new { @class = "onelink" })
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Сongestion)
+            </th>
+            <th>
+                @Html.Label("Tasks", "Tasks")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Salary)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Сongestion)
+                </td>
+                <td>
+                    @if (ViewBag.Tasks != null)
+                    {
+                        <ul>
+                            @foreach (TaskModel task in ViewBag.Tasks)
+                            {
+                                if (task.WorkerId == item.Id)
+                                {
+                                    <li>@task.Name</li>
+                                }
+                            }
+                        </ul>
+                    }
+                </td>
+                <td>
+                    <div class="div">
+                        <ul class="ul">
+                            <li class="li">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</li>
+                            <li class="li">@Html.ActionLink("Details", "Details", new { id = item.Id })</li>
+                            <li class="li">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>
+
+
